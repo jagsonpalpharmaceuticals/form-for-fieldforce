@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regional Language Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; }
+        .form-card { background: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .input-field { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.75rem; outline: none; transition: all 0.2s; }
+        .input-field:focus { border-color: #4f46e5; ring: 2px; ring-color: #c7d2fe; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; font-size: 0.95rem; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto form-card overflow-hidden">
+        <!-- Sticky Header with Language Switcher -->
+        <div class="bg-indigo-600 p-6 flex flex-col md:flex-row justify-between items-center text-white">
+            <h2 class="text-xl font-bold mb-4 md:mb-0" data-i18n="form_title">Data Entry Form</h2>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm font-medium" data-i18n="select_lang">Select Language:</span>
+                <select id="langPicker" onchange="changeLanguage(this.value)" class="text-gray-900 text-sm rounded-lg p-2 outline-none">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                    <option value="bn">Bengali (বাংলা)</option>
+                    <option value="te">Telugu (తెలుగు)</option>
+                    <option value="mr">Marathi (मराठी)</option>
+                    <option value="ta">Tamil (தமிழ்)</option>
+                    <option value="ur">Urdu (اردو)</option>
+                    <option value="gu">Gujarati (ગુજરાતી)</option>
+                    <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                    <option value="ml">Malayalam (മലയാളം)</option>
+                    <option value="or">Odia (ଓଡ଼ିଆ)</option>
+                    <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+                    <option value="as">Assamese (অসমীয়া)</option>
+                    <option value="ks">Kashmiri (کٲشُر)</option>
+                </select>
+            </div>
+        </div>
+
+        <form id="mainForm" class="p-6 md:p-10 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Name -->
+                <div>
+                    <label data-i18n="lbl_name">Full Name *</label>
+                    <input type="text" id="name" required class="input-field" data-i18n-placeholder="ph_name">
+                </div>
+
+                <!-- Mobile -->
+                <div>
+                    <label data-i18n="lbl_mobile">Mobile Number *</label>
+                    <input type="tel" id="mobile" required pattern="[0-9]{10}" class="input-field" data-i18n-placeholder="ph_mobile">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label data-i18n="lbl_email">Email Address *</label>
+                    <input type="email" id="email" required class="input-field" data-i18n-placeholder="ph_email">
+                </div>
+
+                <!-- HQ Dropdown -->
+                <div>
+                    <label data-i18n="lbl_hq">Head Quarter *</label>
+                    <select id="hq" required class="input-field bg-white">
+                        <option value="" data-i18n="opt_select">-- Select HQ --</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                    </select>
+                </div>
+
+                <!-- Division Dropdown -->
+                <div class="md:col-span-2">
+                    <label data-i18n="lbl_division">Division *</label>
+                    <select id="division" required class="input-field bg-white">
+                        <option value="" data-i18n="opt_select_div">-- Select Division --</option>
+                        <option value="Fembon">Fembon</option>
+                        <option value="Naari">Naari</option>
+                        <option value="Boneva">Boneva</option>
+                        <option value="Unify">Unify</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Questionnaire -->
+            <div class="space-y-4 pt-4 border-t border-gray-100">
+                <h3 class="text-lg font-bold text-indigo-600" data-i18n="sec_questions">Questionnaire</h3>
+                
+                <div>
+                    <label data-i18n="q1">1. Current Job Role?</label>
+                    <textarea id="q1" required class="input-field" rows="2"></textarea>
+                </div>
+                <div>
+                    <label data-i18n="q2">2. Sales Targets achieved?</label>
+                    <textarea id="q2" required class="input-field" rows="2"></textarea>
+                </div>
+                <div>
+                    <label data-i18n="q3">3. Major competitors?</label>
+                    <textarea id="q3" required class="input-field" rows="2"></textarea>
+                </div>
+                <div>
+                    <label data-i18n="q4">4. Customer feedback?</label>
+                    <textarea id="q4" required class="input-field" rows="2"></textarea>
+                </div>
+                <div>
+                    <label data-i18n="q5">5. Suggested improvements?</label>
+                    <textarea id="q5" required class="input-field" rows="2"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-indigo-200">
+                <span data-i18n="btn_submit">SUBMIT FORM</span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // 1. Language Translation Dictionary
+        const i18n = {
+            en: {
+                form_title: "Data Entry Form",
+                select_lang: "Select Language:",
+                lbl_name: "Full Name *",
+                ph_name: "Enter your name",
+                lbl_mobile: "Mobile Number *",
+                ph_mobile: "10-digit number",
+                lbl_email: "Email Address *",
+                ph_email: "name@company.com",
+                lbl_hq: "Head Quarter *",
+                opt_select: "-- Select HQ --",
+                lbl_division: "Division *",
+                opt_select_div: "-- Select Division --",
+                sec_questions: "Questionnaire",
+                q1: "1. Current Job Role?",
+                q2: "2. Sales Targets achieved?",
+                q3: "3. Major competitors?",
+                q4: "4. Customer feedback?",
+                q5: "5. Suggested improvements?",
+                btn_submit: "SUBMIT FORM"
+            },
+            hi: {
+                form_title: "डेटा प्रविष्टि फॉर्म",
+                select_lang: "भाषा चुनें:",
+                lbl_name: "पूरा नाम *",
+                ph_name: "अपना नाम दर्ज करें",
+                lbl_mobile: "मोबाइल नंबर *",
+                ph_mobile: "10 अंकों का नंबर",
+                lbl_email: "ईमेल पता *",
+                ph_email: "नाम@कंपनी.कॉम",
+                lbl_hq: "मुख्यालय *",
+                opt_select: "-- मुख्यालय चुनें --",
+                lbl_division: "डिवीजन *",
+                opt_select_div: "-- डिवीजन चुनें --",
+                sec_questions: "प्रश्नावली",
+                q1: "1. वर्तमान नौकरी की भूमिका?",
+                q2: "2. बिक्री लक्ष्य हासिल किया?",
+                q3: "3. प्रमुख प्रतियोगी?",
+                q4: "4. ग्राहक प्रतिक्रिया?",
+                q5: "5. सुधार के सुझाव?",
+                btn_submit: "फॉर्म जमा करें"
+            },
+            bn: {
+                form_title: "ডেটা এন্ট্রি ফর্ম",
+                select_lang: "ভাষা নির্বাচন করুন:",
+                lbl_name: "পুরো নাম *",
+                ph_name: "আপনার নাম লিখুন",
+                lbl_mobile: "মোবাইল নম্বর *",
+                ph_mobile: "১০ সংখ্যার নম্বর",
+                lbl_hq: "সদর দপ্তর *",
+                btn_submit: "জমা দিন"
+            },
+            ta: {
+                form_title: "தரவு உள்ளீட்டு படிவம்",
+                lbl_name: "முழு பெயர் *",
+                ph_name: "உங்கள் பெயரை உள்ளிடவும்",
+                lbl_mobile: "கைபேசி எண் *",
+                btn_submit: "சமர்ப்பிக்கவும்"
+            }
+            // Add other languages here following the same structure
+        };
+
+        // 2. Change Language Function
+        function changeLanguage(lang) {
+            const data = i18n[lang] || i18n['en'];
+
+            // Update Text Content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (data[key]) el.textContent = data[key];
+            });
+
+            // Update Placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (data[key]) el.placeholder = data[key];
+            });
+
+            // Direction support for Urdu/Kashmiri (RTL)
+            document.body.dir = (lang === 'ur' || lang === 'ks') ? 'rtl' : 'ltr';
+        }
+
+        // 3. Form Submission Logic
+        document.getElementById('mainForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect Data
+            const formData = {
+                Name: document.getElementById('name').value,
+                Mobile: document.getElementById('mobile').value,
+                Email: document.getElementById('email').value,
+                HQ: document.getElementById('hq').value,
+                Division: document.getElementById('division').value,
+                Q1: document.getElementById('q1').value,
+                Q2: document.getElementById('q2').value,
+                Q3: document.getElementById('q3').value,
+                Q4: document.getElementById('q4').value,
+                Q5: document.getElementById('q5').value,
+                Submitted_At: new Date().toLocaleString()
+            };
+
+            // Download as CSV
+            const csv = Object.keys(formData).join(",") + "\n" + Object.values(formData).join(",");
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'form_data.csv');
+            a.click();
+
+            alert("Data submitted and downloaded successfully!");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
