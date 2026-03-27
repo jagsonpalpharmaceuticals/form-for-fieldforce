@@ -120,6 +120,7 @@
     </div>
 
     <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbxNwDnHCInAF409Iy0TGPSf0OpJB2aKdLWsh00_toFD1XXsN8GPUAYZO-jpqmOgJAYG/exec";
         // 1. Language Translation Dictionary
         const i18n = {
             en: {
@@ -236,5 +237,40 @@
             this.reset();
         });
     </script>
+<script>
+const scriptURL = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const formData = {
+    name: document.getElementById("name").value,
+    mobile: document.getElementById("mobile").value,
+    email: document.getElementById("email").value,
+    headquarter: document.getElementById("hq").value,
+    division: document.getElementById("division").value,
+    q1: document.getElementById("q1").value,
+    q2: document.getElementById("q2").value,
+    q3: document.getElementById("q3").value,
+    q4: document.getElementById("q4").value,
+    q5: document.getElementById("q5").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => {
+    alert("Form Submitted Successfully ✅");
+    document.querySelector("form").reset();
+  })
+  .catch(err => {
+    alert("Error submitting form ❌");
+  });
+});
+</script>
 </body>
 </html>
